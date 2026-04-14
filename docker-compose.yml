@@ -1,0 +1,27 @@
+services:
+  couchdb-obsidian-livesync:
+    container_name: obsidian-livesync
+    build:
+      context: .
+      dockerfile: Dockerfile
+    # Once you've built and pushed your custom image, swap the above
+    # build block for the line below:
+    # image: your-registry/couchdb-livesync:3.3.3
+    environment:
+      - PUID=99
+      - PGID=100
+      - UMASK=0022
+      - TZ=America/New_York
+      - COUCHDB_USER=obsidian_brian         # change me
+      - COUCHDB_PASSWORD=changeme           # definitely change me
+      - COUCHDB_DB_NAME=obsidiandb          # change me if desired
+    volumes:
+      - /mnt/user/appdata/couchdb-obsidian-livesync/data:/opt/couchdb/data
+      - /mnt/user/appdata/couchdb-obsidian-livesync/etc/local.d:/opt/couchdb/etc/local.d
+    ports:
+      - "5984:5984"
+    restart: unless-stopped
+    labels:
+      - net.unraid.docker.webui=http://[IP]:[PORT:5984]/_utils
+      - net.unraid.docker.icon=https://couchdb.apache.org/image/couch@2x.png
+      - net.unraid.docker.shell=bash
