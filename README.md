@@ -36,7 +36,7 @@ It also creates your Obsidian database automatically using the name defined in `
 services:
   couchdb-obsidian-livesync:
     container_name: obsidian-livesync
-    image: YOURDOCKERHUBUSER/couchdb-livesync:3.3.3
+    image: heyitsbrian/couchdb-livesync:3.3.3
     environment:
       - TZ=America/New_York
       - COUCHDB_USER=obsidian_user       # change me
@@ -62,7 +62,7 @@ docker run -d \
   -v /path/to/appdata/etc/local.d:/opt/couchdb/etc/local.d \
   -p 5984:5984 \
   --restart unless-stopped \
-  YOURDOCKERHUBUSER/couchdb-livesync:3.3.3
+  heyitsbrian/couchdb-livesync:3.3.3
 ```
 
 ---
@@ -103,7 +103,7 @@ Once the container is running, open Obsidian on each device:
 ## Building locally
 
 ```bash
-git clone https://github.com/YOURGITHUBUSER/couchdb-livesync
+git clone https://github.com/hey-its-brian/couchdb-livesync
 cd couchdb-livesync
 docker build -t couchdb-livesync:3.3.3 .
 ```
@@ -127,11 +127,23 @@ To build and push to Docker Hub:
 
 ---
 
+## User-Specific Fields
+
+| File | Item | What to change |
+|---|---|---|
+| docker-compose.yml | COUCHDB_USER | Your chosen CouchDB admin username |
+| docker-compose.yml | COUCHDB_PASSWORD | Your chosen CouchDB admin password |
+| docker-compose.yml | COUCHDB_DB_NAME | Your chosen database name |
+| docker-compose.yml | TZ | Your timezone |
+| docker-compose.yml | Volume paths | Replace /path/to/appdata with your actual appdata location |
+
+---
+
 ## Unraid
 
 This image is available in the Unraid Community Applications store. Search for `couchdb-livesync`.
 
-Template repo: [github.com/YOURGITHUBUSER/unraid-templates](https://github.com/YOURGITHUBUSER/unraid-templates)
+Template repo: [github.com/hey-its-brian/unraid-templates](https://github.com/hey-its-brian/unraid-templates)
 
 ---
 
